@@ -1,0 +1,8 @@
+The build scripts and patches here are Copyright (c) 2026 AmiCradle Team
+and are under the GNU General Public License, version 3 or (at your
+option) any later version, the same licence as The Sound of Sorting:
+https://www.gnu.org/licenses/gpl-3.0.html
+
+The Sound of Sorting itself is Copyright (c) 2013-2014 Timo Bingmann and
+contributors (GPL 3 or later, COPYING in its source). It is fetched at
+build time and is not kept in this repository.
