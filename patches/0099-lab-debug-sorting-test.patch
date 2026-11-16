@@ -1,5 +1,5 @@
 --- a/src/SortTest.cpp	2026-11-16 19:00:47.601720711 +0000
-+++ b/src/SortTest.cpp	2026-11-16 19:00:50.845266822 +0000
++++ b/src/SortTest.cpp	2026-11-16 19:04:20.575786122 +0000
 @@ -20,6 +20,7 @@
   * this program.  If not, see <http://www.gnu.org/licenses/>.
   ******************************************************************************/
@@ -12,9 +12,9 @@
              continue;
  
          wxPrintf(_T("-----------------------------------------------------\n"));
-+        fprintf(stderr, "D algo %u\n", (unsigned)algoi); fflush(stderr);
++        printf("D algo %u\n", (unsigned)algoi); fflush(stdout);
          wxPrintf(_T("Testing %s\n"), ae.name.c_str());
-+        fprintf(stderr, "D printed\n"); fflush(stderr);
++        printf("D printed\n"); fflush(stdout);
  
          for (size_t sizei = 0; testsize[sizei]; ++sizei)
          {
@@ -22,10 +22,10 @@
  
              for (size_t inputi = 0; inputi < inputlist.size(); ++inputi)
              {
-+                fprintf(stderr, "D fill %u/%u\n", (unsigned)n, (unsigned)inputi); fflush(stderr);
++                printf("D fill %u/%u\n", (unsigned)n, (unsigned)inputi); fflush(stdout);
                  SortArray array;
                  array.FillData(inputi, n);
-+                fprintf(stderr, "D filled\n"); fflush(stderr);
++                printf("D filled\n"); fflush(stdout);
  
                  SortedCheck sortcheck(array);
  
@@ -33,11 +33,11 @@
                  if (ae.inversion_count_limit != UINT_MAX)
                      array.SetCalcInversions(false);
  
-+                fprintf(stderr, "D launch\n"); fflush(stderr);
++                printf("D launch\n"); fflush(stdout);
                  wxStopWatch sw;
-+                fprintf(stderr, "D sw\n"); fflush(stderr);
++                printf("D sw\n"); fflush(stdout);
                  ae.func(array);
-+                fprintf(stderr, "D sorted\n"); fflush(stderr);
++                printf("D sorted\n"); fflush(stdout);
                  long millitime = sw.Time();
  
                  if (!array.CheckSorted()) {
