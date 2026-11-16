@@ -1,0 +1,13 @@
+diff --git a/src/wxg/WAbout_wxg.cpp b/src/wxg/WAbout_wxg.cpp
+index e581bbc..991fdec 100644
+--- a/src/wxg/WAbout_wxg.cpp
++++ b/src/wxg/WAbout_wxg.cpp
+@@ -34,7 +34,7 @@ void WAbout_wxg::set_properties()
+ {
+     // begin wxGlade: WAbout_wxg::set_properties
+     SetTitle(_("About"));
+-    labelTitle->SetFont(wxFont(14, wxDEFAULT, wxNORMAL, wxNORMAL, 0, wxT("")));
++    labelTitle->SetFont(wxFont(wxFontInfo(14)));  // wx 3 form: GFOpenWX has no int-family constructor
+     // end wxGlade
+ }
+ 

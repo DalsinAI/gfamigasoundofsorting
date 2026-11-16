@@ -116,7 +116,7 @@ COMMON="SortArray SortSound SortAlgo algorithms/timsort algorithms/wikisort"
 APP="WMain wxg/WMain_wxg wxg/WAbout_wxg WSortView wxClickText"
 M="$O/Makefile"
 {
-    echo "CXXF = $CF -std=gnu++11 $("$WXC" --cxxflags) -I$SDK/include/SDL2 -I$SRC/src -Wno-deprecated-declarations"
+    echo "CXXF = $CF -std=gnu++11 $("$WXC" --cxxflags) -I$SDK/include/SDL2 -I$SRC/src -DPACKAGE_VERSION=\\\"$SOS_VERSION\\\" -Wno-deprecated-declarations"
     C=""; for f in $COMMON; do o="c_$(echo "$f" | tr / _).o"; C="$C $o"; printf '%s: %s\n\tm68k-amigaos-g++ $(CXXF) -MMD -c $< -o $@\n' "$o" "$SRC/src/$f.cpp"; done
     A=""; for f in $APP; do o="a_$(echo "$f" | tr / _).o"; A="$A $o"; printf '%s: %s\n\tm68k-amigaos-g++ $(CXXF) -MMD -c $< -o $@\n' "$o" "$SRC/src/$f.cpp"; done
     printf 'SortTest.o: %s\n\tm68k-amigaos-g++ $(CXXF) -MMD -c $< -o $@\n' "$SRC/src/SortTest.cpp"
