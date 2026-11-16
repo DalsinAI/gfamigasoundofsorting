@@ -1,0 +1,43 @@
+--- a/src/SortTest.cpp	2026-11-16 19:00:47.601720711 +0000
++++ b/src/SortTest.cpp	2026-11-16 19:00:50.845266822 +0000
+@@ -20,6 +20,7 @@
+  * this program.  If not, see <http://www.gnu.org/licenses/>.
+  ******************************************************************************/
+ 
++#include <cstdio>
+ #include <wx/app.h>
+ #include <wx/cmdline.h>
+ #include <wx/stopwatch.h>
+@@ -100,7 +101,9 @@
+             continue;
+ 
+         wxPrintf(_T("-----------------------------------------------------\n"));
++        fprintf(stderr, "D algo %u\n", (unsigned)algoi); fflush(stderr);
+         wxPrintf(_T("Testing %s\n"), ae.name.c_str());
++        fprintf(stderr, "D printed\n"); fflush(stderr);
+ 
+         for (size_t sizei = 0; testsize[sizei]; ++sizei)
+         {
+@@ -110,8 +113,10 @@
+ 
+             for (size_t inputi = 0; inputi < inputlist.size(); ++inputi)
+             {
++                fprintf(stderr, "D fill %u/%u\n", (unsigned)n, (unsigned)inputi); fflush(stderr);
+                 SortArray array;
+                 array.FillData(inputi, n);
++                fprintf(stderr, "D filled\n"); fflush(stderr);
+ 
+                 SortedCheck sortcheck(array);
+ 
+@@ -119,8 +124,11 @@
+                 if (ae.inversion_count_limit != UINT_MAX)
+                     array.SetCalcInversions(false);
+ 
++                fprintf(stderr, "D launch\n"); fflush(stderr);
+                 wxStopWatch sw;
++                fprintf(stderr, "D sw\n"); fflush(stderr);
+                 ae.func(array);
++                fprintf(stderr, "D sorted\n"); fflush(stderr);
+                 long millitime = sw.Time();
+ 
+                 if (!array.CheckSorted()) {
