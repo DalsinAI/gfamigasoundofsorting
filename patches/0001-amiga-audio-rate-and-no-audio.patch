@@ -1,0 +1,34 @@
+diff --git a/src/WMain.cpp b/src/WMain.cpp
+index 297d0a3..e02633b 100644
+--- a/src/WMain.cpp
++++ b/src/WMain.cpp
+@@ -80,7 +80,13 @@ WMain::WMain(wxWindow* parent)
+     SDL_AudioSpec sdlaudiospec;
+ 
+     // Set the audio format
++#ifdef __amigaos__
++    // a 68040 makes every sample itself (SoundCallback): half the rate
++    // keeps the sound with the bars
++    sdlaudiospec.freq = 22050;
++#else
+     sdlaudiospec.freq = 44100;
++#endif
+     sdlaudiospec.format = AUDIO_S16SYS;
+     sdlaudiospec.channels = 1;    	/* 1 = mono, 2 = stereo */
+     sdlaudiospec.samples = 4096;  	/* Good low-latency value for callback */
+@@ -448,9 +454,15 @@ public:
+     {
+         if (SDL_Init(SDL_INIT_AUDIO) < 0)
+         {
++#ifdef __amigaos__
++            // no SDL 2 audio (no GFOpenGPU part, or no audio device): the
++            // bars still sort, and SDL_OpenAudio's error turns sound off
++            wxLogWarning(wxT("Couldn't initialize SDL audio: ") + wxString(SDL_GetError(), wxConvISO8859_1));
++#else
+             wxLogError(wxT("Couldn't initialize SDL: ") + wxString(SDL_GetError(), wxConvISO8859_1));
+             wxLog::FlushActive();
+             return false;
++#endif
+         }
+ 
+         srand((int)wxGetLocalTime());
